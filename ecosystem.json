@@ -1,0 +1,6 @@
+{
+  "apps": [{
+    "name": "cian",
+    "script": "index.js",
+  }]
+}
