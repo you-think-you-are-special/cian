@@ -17,7 +17,7 @@ module.exports.parse = (url, concurrency = 1) =>{
             let $ = cheerio.load(res.body);
             const pagesCount = $('.pager_pages a').length + 1;
 
-            return P.map([1] || getGen(pagesCount), i =>{ //remove this shit
+            return P.map(getGen(pagesCount), i =>{
                 return request.getAsync(url + '&p=' + i)
                     .then(res =>{
                         console.log(`Page ${i} parsed`);
