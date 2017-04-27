@@ -1,23 +1,32 @@
 const P = require('bluebird');
 const request = P.promisifyAll(require('request'));
-const hook = 'https://hooks.slack.com/services/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';
+const hook = 'https://hooks.slack.com/services/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';
 
 module.exports.notify = function(params){
     console.log('Send data to slack');
 
-    const {price, link, img, area, metro, commission, pledge, text} = params;
+    const {price, link, img, area, metro, desc, text, floor, forLive} = params;
+
+    if(forLive === 'жилой дом') {
+        return;
+    }
 
     const message = {
-        "channel": "#cian",
+        "channel": "#jane_cian",
         "icon_emoji": ":kissing_closed_eyes:",
         "attachments": [
             {
                 "pretext": text,
                 "image_url": img,
-                "title": metro,
+                "title": link,
                 "title_link": link,
                 "color": "#36a64f",
                 "fields": [
+                    {
+                        "title": "Метро:",
+                        "value": metro,
+                        "short": true
+                    },
                     {
                         "title": "Цена:",
                         "value": price + ' Руб.',
@@ -29,14 +38,14 @@ module.exports.notify = function(params){
                         "short": true
                     },
                     {
-                        "title": "Комиссия:",
-                        "value": commission,
+                        "title": "Этаж:",
+                        "value": floor,
                         "short": true
                     },
                     {
-                        "title": "Залог:",
-                        "value": pledge,
-                        "short": true
+                        "title": "Описание:",
+                        "value": desc,
+                        "short": false
                     }
                 ]
             }

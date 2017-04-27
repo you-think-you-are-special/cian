@@ -72,6 +72,8 @@ function parsePage(body){
 
     $('.serp-list .serp-item').each((i, el) =>{
         const metro = $(el).find('div.serp-item__metro').text().trim();
+        const floor = $(el).find('div.serp-item__floor-col .serp-item__solid').text().trim();
+        const forLive = $(el).find('div.serp-item__floor-col .serp-item__prop').text().trim();
         const price = $(el).find('div.serp-item__price-col .serp-item__solid').text().trim().replace(' руб./мес.', '').replace(/ /g, '');
         const link = $(el).find('a.serp-item__card-link.link').attr('href');
         const area = $(el).find('.serp-item__area-col .serp-item__solid').text().replace(' м2', '');
@@ -83,7 +85,8 @@ function parsePage(body){
             metro: metro, price: parseInt(price, 10), link: link, area: parseInt(area, 10), img: img,
             commission: $(el).find('div.serp-item__price-col .serp-item__prop').eq(0).text().replace('комиссия ', '').replace(/\t/g, '').replace(/\n/g, '').trim(),
             pledge: $(el).find('div.serp-item__price-col .serp-item__prop').eq(1).text().replace('залог ', '').replace(/\t/g, '').replace(/\n/g, '').trim(),
-            desc: $(el).find('.serp-item__description__text').text().replace(/\t/g, '').replace(/\n/g, '').trim()
+            desc: $(el).find('.serp-item__description__text').text().replace(/\t/g, '').replace(/\n/g, '').trim(),
+            floor: floor, forLive: forLive
         };
     });
 
