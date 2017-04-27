@@ -16,10 +16,10 @@ module.exports.notify = function(params){
         "icon_emoji": ":kissing_closed_eyes:",
         "attachments": [
             {
-                "pretext": text,
+                "pretext": link,
                 "image_url": img,
-                "title": link,
-                "title_link": link,
+                "title": '',
+                "title_link": '',
                 "color": "#36a64f",
                 "fields": [
                     {
@@ -47,6 +47,7 @@ module.exports.notify = function(params){
                         "value": desc,
                         "short": false
                     }
+
                 ]
             }
         ]
