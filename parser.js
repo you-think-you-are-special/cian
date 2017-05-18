@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 const store = require('./storage');
 
 
-module.exports.parse = (url, concurrency = 1) =>{
+module.exports.parse = (url, dbName, concurrency = 1) =>{
     console.log('Start parsing');
     return request.getAsync(url)
         .then(res=>{
@@ -39,9 +39,9 @@ module.exports.parse = (url, concurrency = 1) =>{
             });
 
 
-            const db = store.getAll();
+            const db = store.getAll(dbName);
             const newData = _.omit(data, Object.keys(db));
-            store.saveAll(JSON.stringify(data));
+            store.saveAll(dbName, JSON.stringify(data));
             return prepare(newData);
         })
 };
